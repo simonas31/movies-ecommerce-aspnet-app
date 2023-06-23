@@ -1,4 +1,6 @@
 ﻿using AutoMapper;
+using Server.DTO;
+using Server.Models;
 
 namespace Server.Helper
 {
@@ -6,7 +8,10 @@ namespace Server.Helper
 	{
 		public MappingProfiles()
 		{
-			//CreateMap<Model class, DTO class>();
+			CreateMap<Actor, ActorDTO>();
+			CreateMap<Cinema, CinemaDTO>();
+			CreateMap<Movie, MovieDTO>();
+			CreateMap<Producer, ProducerDTO>();
 		}
 	}
 }

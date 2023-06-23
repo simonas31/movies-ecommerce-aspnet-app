@@ -6,5 +6,6 @@ namespace Server.Interfaces
 	{
 		Task<IEnumerable<Cinema>> GetAllAsync();
 		Task<IEnumerable<Cinema>> GetByNameAsync(string name);
+		Task<bool> CinemaExistsAsync(string name);
 	}
 }

@@ -12,6 +12,8 @@ builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());//enable
 
 builder.Services.AddScoped<IActorsRepository, ActorsRepository>();
 builder.Services.AddScoped<ICinemasRepository, CinemasRepository>();
+builder.Services.AddScoped<IMoviesRepository, MoviesRepository>();
+builder.Services.AddScoped<IProducersRepository, ProducersRepository>();
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();

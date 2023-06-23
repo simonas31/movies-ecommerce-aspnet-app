@@ -1,4 +1,5 @@
-﻿using Server.Data;
+﻿using Microsoft.EntityFrameworkCore;
+using Server.Data;
 using Server.Interfaces;
 using Server.Models;
 
@@ -6,7 +7,7 @@ namespace Server.Repositories
 {
 	public class MoviesRepository : IMoviesRepository
 	{
-		ApplicationDbContext _context;
+		private readonly ApplicationDbContext _context;
 		public MoviesRepository(ApplicationDbContext context)
 		{
 			_context = context;
@@ -39,6 +40,11 @@ namespace Server.Repositories
 		public Task<IEnumerable<Movie>> GetProducerMoviesAsync(string producerName)
 		{
 			throw new NotImplementedException();
+		}
+
+		public Task<bool> MovieExistsAsync(string name)
+		{
+			return _context.Movies.AnyAsync(m => m.Name.Contains(name));
 		}
 	}
 }

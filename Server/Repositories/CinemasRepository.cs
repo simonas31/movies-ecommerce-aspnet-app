@@ -1,4 +1,5 @@
-﻿using Server.Data;
+﻿using Microsoft.EntityFrameworkCore;
+using Server.Data;
 using Server.Interfaces;
 using Server.Models;
 
@@ -6,19 +7,29 @@ namespace Server.Repositories
 {
 	public class CinemasRepository : ICinemasRepository
 	{
-		ApplicationDbContext _context;
+		private readonly ApplicationDbContext _context;
 		public CinemasRepository(ApplicationDbContext context)
 		{
 			_context = context;
 		}
-		public Task<IEnumerable<Cinema>> GetAllAsync()
+
+		public async Task<IEnumerable<Cinema>> GetAllAsync()
 		{
-			throw new NotImplementedException();
+			var cinemas = await _context.Cinemas.ToListAsync();
+
+			return cinemas.OrderBy(c => c.Name).ToList();
 		}
 
-		public Task<IEnumerable<Cinema>> GetByNameAsync(string name)
+		public async Task<IEnumerable<Cinema>> GetByNameAsync(string name)
 		{
-			throw new NotImplementedException();
+			var cinemas = await _context.Cinemas.ToListAsync();
+
+			return cinemas.Where(c => c.Name == name).ToList();
+		}
+
+		public Task<bool> CinemaExistsAsync(string name)
+		{
+			return _context.Cinemas.AnyAsync(c => c.Name.Contains(name));
 		}
 	}
 }

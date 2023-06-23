@@ -6,5 +6,6 @@ namespace Server.Interfaces
 	{
 		Task<IEnumerable<Actor>> GetAllAsync();
 		Task<IEnumerable<Actor>> GetByNameAsync(string name);
+		Task<bool> ActorExistsAsync(string name);
 	}
 }

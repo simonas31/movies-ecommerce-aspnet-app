@@ -6,6 +6,6 @@ namespace Server.Interfaces
 	{
 		Task<IEnumerable<Producer>> GetAllAsync();
 		Task<IEnumerable<Producer>> GetByNameAsync(string name);
-
+		Task<bool> ProducerExistsAsync(string name);
 	}
 }
