@@ -47,6 +47,19 @@ namespace Server.Data
 				.HasOne(p => p.Producer)
 				.WithMany(pm => pm.Producers_Movies)
 				.HasForeignKey(p => p.ProducerId);
+
+			builder.Entity<Movie>()
+				.HasIndex(m => m.Name)
+				.IsUnique();
+			builder.Entity<Actor>()
+				.HasIndex(m => m.FullName)
+				.IsUnique();
+			builder.Entity<Producer>()
+				.HasIndex(m => m.FullName)
+				.IsUnique();
+			builder.Entity<Cinema>()
+				.HasIndex(m => m.Name)
+				.IsUnique();
 		}
 
 		public DbSet<Producer_Movie> Producers_Movies { get; set; }

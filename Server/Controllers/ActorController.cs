@@ -6,7 +6,7 @@ using Server.Models;
 
 namespace Server.Controllers
 {
-	[Route("api/[controller]")]
+	[Route("api")]
 	[ApiController]
 	public class ActorController : Controller
 	{
@@ -18,7 +18,7 @@ namespace Server.Controllers
 			_mapper = mapper;
 		}
 
-		[HttpGet]
+		[HttpGet("[controller]s")]
 		[ProducesResponseType(200, Type = typeof(IEnumerable<Actor>))]
 		public async Task<IActionResult> GetAllActorsAsync()
 		{
@@ -30,7 +30,23 @@ namespace Server.Controllers
 			return Ok(actors);
 		}
 
-		[HttpGet("{name}")]
+		[HttpGet("[controller]/{id}")]
+		[ProducesResponseType(200, Type = typeof(Actor))]
+		[ProducesResponseType(400)]
+		public async Task<IActionResult> GetActorAsync(string id)
+		{
+			if (!await _actorsRepository.ActorExistsByIdAsync(id))
+				return NotFound();
+
+			var actor = await _actorsRepository.GetActorAsync(id);
+
+			if(!ModelState.IsValid)
+				return BadRequest(ModelState);
+
+			return Ok(actor);
+		}
+		
+		[HttpGet("[controller]s/{name}")]
 		[ProducesResponseType(200, Type = typeof(IEnumerable<Actor>))]
 		[ProducesResponseType(400)]
 		public async Task<IActionResult> GetActorsAsync(string name)

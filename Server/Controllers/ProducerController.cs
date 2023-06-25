@@ -3,10 +3,11 @@ using Microsoft.AspNetCore.Mvc;
 using Server.DTO;
 using Server.Interfaces;
 using Server.Models;
+using Server.Repositories;
 
 namespace Server.Controllers
 {
-	[Route("api/[controller]")]
+	[Route("api")]
 	[ApiController]
 	public class ProducerController : Controller
 	{
@@ -18,7 +19,7 @@ namespace Server.Controllers
 			_mapper = mapper;
 		}
 
-		[HttpGet]
+		[HttpGet("[controller]s")]
 		[ProducesResponseType(200, Type = typeof(IEnumerable<Producer>))]
 		public async Task<IActionResult> GetAllProducersAsync()
 		{
@@ -30,7 +31,23 @@ namespace Server.Controllers
 			return Ok(producers);
 		}
 
-		[HttpGet("{name}")]
+		[HttpGet("[controller]/{id}")]
+		[ProducesResponseType(200, Type = typeof(Producer))]
+		[ProducesResponseType(400)]
+		public async Task<IActionResult> GetActorAsync(string id)
+		{
+			if (!await _producersRepository.ProducerExistsByIdAsync(id))
+				return NotFound();
+
+			var producer = await _producersRepository.GetProducerAsync(id);
+
+			if (!ModelState.IsValid)
+				return BadRequest(ModelState);
+
+			return Ok(producer);
+		}
+
+		[HttpGet("[controller]s/{name}")]
 		[ProducesResponseType(200, Type = typeof(IEnumerable<Producer>))]
 		[ProducesResponseType(400)]
 		public async Task<IActionResult> GetProducersAsync(string name)

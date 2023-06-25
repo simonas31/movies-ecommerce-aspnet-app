@@ -4,8 +4,10 @@ namespace Server.Interfaces
 {
 	public interface ICinemasRepository
 	{
-		Task<IEnumerable<Cinema>> GetAllAsync();
-		Task<IEnumerable<Cinema>> GetByNameAsync(string name);
+		Task<ICollection<Cinema>> GetAllAsync();
+		Task<Cinema> GetCinemaAsync(string id);
+		Task<ICollection<Cinema>> GetByNameAsync(string name);
 		Task<bool> CinemaExistsAsync(string name);
+		Task<bool> CinemaExistsByIdAsync(string id);
 	}
 }

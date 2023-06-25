@@ -4,8 +4,10 @@ namespace Server.Interfaces
 {
 	public interface IActorsRepository
 	{
-		Task<IEnumerable<Actor>> GetAllAsync();
-		Task<IEnumerable<Actor>> GetByNameAsync(string name);
+		Task<ICollection<Actor>> GetAllAsync();
+		Task<Actor> GetActorAsync(string id);
+		Task<ICollection<Actor>> GetByNameAsync(string name);
 		Task<bool> ActorExistsAsync(string name);
+		Task<bool> ActorExistsByIdAsync(string id);
 	}
 }
