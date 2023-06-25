@@ -78,5 +78,39 @@ namespace Server.Controllers
 
 			return Ok(movies);
 		}
+
+		[HttpGet("Producer/{producerName}")]
+		[ProducesResponseType(200, Type = typeof(IEnumerable<Movie>))]
+		[ProducesResponseType(400)]
+		public async Task<IActionResult> GetProducerMoviesAsync(string producerName)
+		{
+			var movies = _mapper.Map<List<MovieDTO>>(await _moviesRepository.GetProducerMoviesAsync(producerName));
+
+			if (movies == null)
+				return NotFound();
+			else if (movies.Count() == 0)
+				return NotFound();
+			else if (!ModelState.IsValid)
+				return BadRequest(ModelState);
+
+			return Ok(movies);
+		}
+
+		[HttpGet("Actor/{actorName}")]
+		[ProducesResponseType(200, Type = typeof(IEnumerable<Movie>))]
+		[ProducesResponseType(400)]
+		public async Task<IActionResult> GetActorMoviesAsync(string actorName)
+		{
+			var movies = _mapper.Map<List<MovieDTO>>(await _moviesRepository.GetActorMoviesAsync(actorName));
+
+			if (movies == null)
+				return NotFound();
+			else if (movies.Count() == 0)
+				return NotFound();
+			else if (!ModelState.IsValid)
+				return BadRequest(ModelState);
+
+			return Ok(movies);
+		}
 	}
 }
