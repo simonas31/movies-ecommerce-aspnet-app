@@ -15,16 +15,14 @@ namespace Server.Repositories
 
 		public async Task<IEnumerable<Producer>> GetAllAsync()
 		{
-			var producers = await _context.Producers.ToListAsync();
-
-			return producers.OrderBy(c => c.FullName).ToList();
+			return await _context.Producers.OrderBy(c => c.FullName).ToListAsync();
 		}
 
 		public async Task<IEnumerable<Producer>> GetByNameAsync(string name)
 		{
-			var producers = await _context.Producers.ToListAsync();
-
-			return producers.Where(c => c.FullName.Contains(name)).OrderBy(c => c.FullName).ToList();
+			return await _context.Producers
+				.Where(c => c.FullName.Contains(name))
+				.OrderBy(c => c.FullName).ToListAsync();
 		}
 
 		public Task<bool> ProducerExistsAsync(string name)

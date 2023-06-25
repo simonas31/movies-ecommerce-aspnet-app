@@ -40,6 +40,8 @@ namespace Server.Controllers
 
 			var cinemas = _mapper.Map<List<CinemaDTO>>(await _cinemasRepository.GetByNameAsync(name));
 
+			if (cinemas.Count() <= 0)
+				return NotFound();
 			if (!ModelState.IsValid)
 				return BadRequest(ModelState);
 

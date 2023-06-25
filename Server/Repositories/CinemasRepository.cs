@@ -15,21 +15,17 @@ namespace Server.Repositories
 
 		public async Task<IEnumerable<Cinema>> GetAllAsync()
 		{
-			var cinemas = await _context.Cinemas.ToListAsync();
-
-			return cinemas.OrderBy(c => c.Name).ToList();
+			return await _context.Cinemas.OrderBy(c => c.Name).ToListAsync();
 		}
 
 		public async Task<IEnumerable<Cinema>> GetByNameAsync(string name)
 		{
-			var cinemas = await _context.Cinemas.ToListAsync();
-
-			return cinemas.Where(c => c.Name == name).ToList();
+			return await _context.Cinemas.Where(c => c.Name == name).ToListAsync();
 		}
 
-		public Task<bool> CinemaExistsAsync(string name)
+		public async Task<bool> CinemaExistsAsync(string name)
 		{
-			return _context.Cinemas.AnyAsync(c => c.Name.Contains(name));
+			return await _context.Cinemas.AnyAsync(c => c.Name.Contains(name));
 		}
 	}
 }
