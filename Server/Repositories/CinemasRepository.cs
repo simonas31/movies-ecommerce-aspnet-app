@@ -25,7 +25,7 @@ namespace Server.Repositories
 
 		public async Task<bool> CinemaExistsAsync(string name)
 		{
-			return await _context.Cinemas.AnyAsync(c => c.Name.Contains(name));
+			return await _context.Cinemas.AnyAsync(c => c.Name.Equals(name));
 		}
 	}
 }

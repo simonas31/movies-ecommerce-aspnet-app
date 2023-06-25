@@ -64,7 +64,7 @@ namespace Server.Repositories
 				return null;
 			}
 
-			var cinemas = await _context.Cinemas.Where(c => c.Name.Contains(cinemaName)).ToListAsync();
+			var cinemas = await _context.Cinemas.Where(c => c.Name.Equals(cinemaName)).ToListAsync();
 
 			var CinemaMoviesIds = (from cm in _context.Cinemas_Movies.ToList()
 									   from c in cinemas
@@ -91,7 +91,7 @@ namespace Server.Repositories
 				return null;
 			}
 
-			var producers = await _context.Producers.Where(c => c.FullName.Contains(producerName)).ToListAsync();
+			var producers = await _context.Producers.Where(c => c.FullName.Equals(producerName)).ToListAsync();
 
 			var ProducerMoviesIds = (from pm in _context.Producers_Movies.ToList()
 								   from p in producers
@@ -118,7 +118,7 @@ namespace Server.Repositories
 				return null;
 			}
 
-			var actors = await _context.Actors.Where(c => c.FullName.Contains(actorName)).ToListAsync();
+			var actors = await _context.Actors.Where(c => c.FullName.Equals(actorName)).ToListAsync();
 
 			var CinemaMoviesIds = (from am in _context.Actors_Movies.ToList()
 								   from a in actors

@@ -21,13 +21,13 @@ namespace Server.Repositories
 		public async Task<IEnumerable<Producer>> GetByNameAsync(string name)
 		{
 			return await _context.Producers
-				.Where(c => c.FullName.Contains(name))
+				.Where(c => c.FullName.Equals(name))
 				.OrderBy(c => c.FullName).ToListAsync();
 		}
 
 		public Task<bool> ProducerExistsAsync(string name)
 		{
-			return _context.Producers.AnyAsync(p => p.FullName.Contains(name));
+			return _context.Producers.AnyAsync(p => p.FullName.Equals(name));
 		}
 	}
 }
