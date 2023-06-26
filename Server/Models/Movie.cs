@@ -1,4 +1,6 @@
-﻿namespace Server.Models
+﻿using System.Text.Json.Serialization;
+
+namespace Server.Models
 {
 	public class Movie
 	{
@@ -12,8 +14,11 @@
 		public string MovieCategory { get; set; }
 
 		//Relationships
+		[JsonIgnore]
 		public ICollection<Actor_Movie> Actors_Movies { get; set; }
+		[JsonIgnore]
 		public ICollection<Cinema_Movie> Cinemas_Movies { get; set; }
+		[JsonIgnore]
 		public ICollection<Producer_Movie> Producers_Movies { get; set; }
 	}
 }

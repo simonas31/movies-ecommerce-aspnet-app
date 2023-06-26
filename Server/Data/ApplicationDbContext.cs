@@ -21,7 +21,7 @@ namespace Server.Data
 				.HasForeignKey(m => m.MovieId);
 			builder.Entity<Actor_Movie>()
 				.HasOne(a => a.Actor)
-				.WithMany(am => am.Actors_Movies)
+				.WithMany(am => am.Actor_Movies)
 				.HasForeignKey(a => a.ActorId);
 
 			//cinema_movie join table foreign keys
@@ -33,7 +33,7 @@ namespace Server.Data
 				.HasForeignKey(m => m.MovieId);
 			builder.Entity<Cinema_Movie>()
 				.HasOne(c => c.Cinema)
-				.WithMany(cm => cm.Cinemas_Movies)
+				.WithMany(cm => cm.Cinema_Movies)
 				.HasForeignKey(c => c.CinemaId);
 
 			//producer_movie join table foreign keys
@@ -45,21 +45,8 @@ namespace Server.Data
 				.HasForeignKey(m => m.MovieId);
 			builder.Entity<Producer_Movie>()
 				.HasOne(p => p.Producer)
-				.WithMany(pm => pm.Producers_Movies)
+				.WithMany(pm => pm.Producer_Movies)
 				.HasForeignKey(p => p.ProducerId);
-
-			builder.Entity<Movie>()
-				.HasIndex(m => m.Name)
-				.IsUnique();
-			builder.Entity<Actor>()
-				.HasIndex(m => m.FullName)
-				.IsUnique();
-			builder.Entity<Producer>()
-				.HasIndex(m => m.FullName)
-				.IsUnique();
-			builder.Entity<Cinema>()
-				.HasIndex(m => m.Name)
-				.IsUnique();
 		}
 
 		public DbSet<Producer_Movie> Producers_Movies { get; set; }

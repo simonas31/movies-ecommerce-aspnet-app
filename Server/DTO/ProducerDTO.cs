@@ -1,4 +1,6 @@
-﻿namespace Server.DTO
+﻿using Server.Models;
+
+namespace Server.DTO
 {
 	public class ProducerDTO
 	{

@@ -8,6 +8,6 @@
 		public string Description { get; set; }
 
 		//Relationships
-		public ICollection<Producer_Movie> Producers_Movies { get; set; }
+		public ICollection<Producer_Movie> Producer_Movies { get; set; }
 	}
 }

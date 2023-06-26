@@ -8,6 +8,6 @@
 		public string Bio { get; set; }
 
 		//Relationships
-		public ICollection<Actor_Movie> Actors_Movies { get; set; }
+		public ICollection<Actor_Movie> Actor_Movies { get; set; }
 	}
 }
